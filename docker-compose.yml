@@ -1,0 +1,19 @@
+version: '2'
+services:
+  redis:
+    image: "redis:3.0-alpine"
+    command: redis-server --requirepass devpass
+    volumes:
+      - "./data/redis:/data"
+    ports:
+      - "6379:6379"
+  minio:
+   image: "minio/minio"
+   command: server /data
+   ports:
+     - "9000:9000"
+   volumes:
+     - "./data/minio:/data"
+   environment:
+      MINIO_ACCESS_KEY: minion
+      MINIO_SECRET_KEY: 123456789
