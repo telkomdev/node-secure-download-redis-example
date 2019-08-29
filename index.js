@@ -79,8 +79,9 @@ app.get('/download', async (req, res, next) => {
 			}
 
 			if (value) {
-				console.log(value);
+				// remove key after file downloade once
 				redisClient.del(fileId);
+
 				//return res.json({'success': true, 'message': value});
 				return res.redirect(301, value);
 			}
