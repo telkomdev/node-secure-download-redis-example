@@ -66,14 +66,14 @@ app.post('/upload', multer({storage: multer.memoryStorage()}).single("file"), as
 	}
 });
 
-app.get('/download', async (req, res, next) => {
+app.get('/download', (req, res, next) => {
 	if (!req.query.id) {
 		return res.json({'success': false, 'message': 'required file id'});
 	}
 
 	const fileId = req.query.id;
 	try {
-		redisClient.get(fileId, async (err, value) => {
+		redisClient.get(fileId, (err, value) => {
 			if (err) {
 				return res.json({'success': false, 'message': err});
 			}
